@@ -23,13 +23,15 @@
     "wait-on": "^5.2.0",
     "web-vitals": "^0.2.4"
   },
+  "homepage": "./",
   "main": "main.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-react": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
+    "electron-react": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "ebuild": "npm run build && ./build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +53,28 @@
   },
   "devDependencies": {
     "electron": "^10.1.5"
+  },
+  "build": {
+    "appId": "com.amazon-clone",
+    "compression": "normal",
+    "productName": "Amazon Clone",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "mac": {
+      "icon": "assets/icon.icns",
+      "type": "distribution",
+      "target": [
+        "pkg",
+        "dmg"
+      ],
+      "publish": {
+        "provider": "s3",
+        "bucket": "example-releases",
+        "path": "releases"
+      },
+      "category": "public.app-category.news"
+    }
   }
 }
